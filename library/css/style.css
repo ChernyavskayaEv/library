@@ -121,6 +121,25 @@ body {
   color: #000;
 }
 
+h1 {
+  color: #fff;
+  font-family: Forum;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: 0.6px;
+}
+
+h2 {
+  color: #0c0c0e;
+  font-family: Forum;
+  font-size: 40px;
+  margin: 20px auto;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
 .header {
   width: 100%;
   background: #0c0c0e;
@@ -140,16 +159,6 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 90px;
-}
-
-h1 {
-  color: #fff;
-  font-family: Forum;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 50px;
-  letter-spacing: 0.6px;
 }
 
 .header__wrapper-link {
@@ -241,4 +250,68 @@ h1 {
   line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+.about {
+  width: 1440px;
+  height: 837px;
+  background: #fff;
+}
+
+.about__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.underline {
+  width: 50px;
+  height: 1px;
+  background: #0c0c0e;
+}
+
+.about__description {
+  margin: 40px auto 20px;
+}
+.about__photo-gallery {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  width: 1400px;
+  height: 560px;
+}
+.about__photo-gallery_item {
+  width: 450px;
+  height: 560px;
+}
+.about__slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35px;
+}
+.about__slider_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.about__pagination_button {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+.active {
+  background-color: #bb945f;
+}
+
+.invisible {
+  display: none;
 }

@@ -110,9 +110,9 @@ h6 {
 }
 
 body {
-  width: 1440px;
+  width: 100vw;
   margin: 0 auto;
-  background-color: darkgray;
+  background-color: #fff;
   font-family: Inter;
   font-size: 20px;
   font-style: normal;
@@ -143,9 +143,9 @@ h2 {
 .header {
   width: 100%;
   background: #0c0c0e;
-  /* position: fixed;
+  position: fixed;
   top: 0;
-  left: 0; */
+  left: 0;
 }
 
 .wrapper {
@@ -188,7 +188,7 @@ h2 {
   width: 0%;
   height: 1px;
   background-color: #fff;
-  transition: 0.2s;
+  transition: 0.5s;
 }
 
 .header__link:hover::before {
@@ -213,13 +213,17 @@ h2 {
 .welcome {
   width: 100%;
   height: 600px;
-  /* margin-top: 90px; */
+  margin-top: 90px;
   background: url(/library/img/welcome.jpeg) lightgray 50% / cover no-repeat;
+}
+
+.welcome .wrapper {
+  width: 1440px;
 }
 
 .welcome__gradient {
   height: 600px;
-  /* margin-top: 90px; */
+  margin-top: 90px;
   background: linear-gradient(
     180deg,
     #0c0c0e 0%,
@@ -255,10 +259,12 @@ h2 {
 .about {
   width: 1440px;
   height: 837px;
+  margin: 0 auto;
   background: #fff;
 }
 
-.about__wrapper {
+.about__wrapper,
+.favorites__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -306,6 +312,176 @@ h2 {
   height: 16px;
   border-radius: 50%;
   background-color: #000;
+}
+
+.favorites {
+  width: 1440px;
+  height: 1439px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.favorites__description {
+  width: 100%;
+  margin-top: 40px;
+  align-self: flex-start;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.favorites__season {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 92px;
+}
+
+.favorites__season_item {
+  display: flex;
+  align-items: center;
+}
+
+.season_input {
+  width: 17px;
+  height: 17px;
+  margin-right: 20px;
+  color: #000;
+  accent-color: #000;
+}
+
+.season_label {
+  line-height: normal;
+}
+
+.season_input:checked + .season_label {
+  font-weight: 700;
+}
+
+.favorites__books {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.winter {
+}
+
+.spring {
+}
+
+.summer {
+}
+
+.autumn {
+}
+
+.book {
+  width: 590px;
+  height: 555px;
+  margin-top: 40px;
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.book__wrapper {
+  width: 550px;
+  height: 555px;
+  border: 1px solid #000;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.book__info {
+  width: 355px;
+  height: 525px;
+  margin: 14px 15px 15px 20px;
+}
+
+.book__staff-pick {
+  font-family: Forum;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.book__underline {
+  width: 60px;
+  height: 1px;
+  background: #bb945f;
+}
+
+.book__name {
+  width: max-content;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 19px;
+}
+
+.book__author {
+  width: max-content;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.book__description {
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  margin-top: 20px;
+}
+
+.book__button {
+  width: 75px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #0c0c0e;
+  color: #0c0c0e;
+  background-color: #fff;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 20px;
+  bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  transition: 0.5s;
+}
+
+.book__button:hover {
+  border: 1px solid #bb945f;
+  background: #bb945f;
+  cursor: pointer;
+}
+
+.book__button:disabled {
+  background-color: #fff;
+  border: 1px solid #bb945f;
+  color: #bb945f;
+  cursor: not-allowed;
+}
+
+.book__picture {
+  width: 200px;
+  height: 300px;
+  background: lightgray 50% / cover no-repeat;
+  flex-shrink: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .active {

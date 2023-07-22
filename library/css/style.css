@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -143,9 +144,10 @@ h2 {
 .header {
   width: 100%;
   background: #0c0c0e;
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
+  z-index: 1; */
 }
 
 .wrapper {
@@ -213,7 +215,7 @@ h2 {
 .welcome {
   width: 100%;
   height: 600px;
-  margin-top: 90px;
+  /* margin-top: 90px; */
   background: url(/library/img/welcome.jpeg) lightgray 50% / cover no-repeat;
 }
 
@@ -223,7 +225,7 @@ h2 {
 
 .welcome__gradient {
   height: 600px;
-  margin-top: 90px;
+  /* margin-top: 90px; */
   background: linear-gradient(
     180deg,
     #0c0c0e 0%,
@@ -264,7 +266,8 @@ h2 {
 }
 
 .about__wrapper,
-.favorites__wrapper {
+.favorites__wrapper,
+.coffee-shop__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -341,6 +344,7 @@ h2 {
 .favorites__season_item {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .season_input {
@@ -349,10 +353,12 @@ h2 {
   margin-right: 20px;
   color: #000;
   accent-color: #000;
+  cursor: pointer;
 }
 
 .season_label {
   line-height: normal;
+  cursor: pointer;
 }
 
 .season_input:checked + .season_label {
@@ -397,7 +403,7 @@ h2 {
 }
 
 .book__info {
-  width: 355px;
+  width: 357px;
   height: 525px;
   margin: 14px 15px 15px 20px;
 }
@@ -482,6 +488,79 @@ h2 {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+.coffee-shop {
+  width: 1440px;
+  height: 841px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.coffee-shop__description {
+  text-align: center;
+  letter-spacing: 2px;
+  margin: 40px auto 0px;
+}
+
+.coffee-shop__menu {
+  width: 1400px;
+  height: 520px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coffee-shop__menu-section {
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.coffee-shop__menu-section:last-child {
+  align-items: flex-end;
+  gap: 40px;
+}
+
+.coffee-shop__title {
+  color: #bb945f;
+  font-family: Forum;
+  font-size: 40px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.coffee-shop__item {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 57px;
+}
+
+.coffee-shop__item_name {
+  width: 200px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.coffee-shop__item_line {
+  width: 100px;
+  height: 1px;
+  background: #bb945f;
+}
+
+.coffee-shop__menu-section:last-child .coffee-shop__item {
+  justify-content: end;
+}
+
+.coffee-shop__menu-section:last-child .coffee-shop__item_name {
+  width: 215px;
+  text-align: end;
 }
 
 .active {

@@ -268,7 +268,8 @@ h2 {
 .about__wrapper,
 .favorites__wrapper,
 .coffee-shop__wrapper,
-.contacts__wrapper {
+.contacts__wrapper,
+.librarycard__wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -465,7 +466,7 @@ h2 {
   justify-content: center;
   align-items: center;
   margin-top: 15px;
-  transition: 0.5s;
+  transition: 1s;
 }
 
 .book__button:hover {
@@ -620,6 +621,152 @@ h2 {
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: capitalize;
+}
+
+.librarycard {
+  width: 1440px;
+  height: 614px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.librarycard__card-block {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.librarycard__find-card {
+  width: 600px;
+  height: 453px;
+  flex-shrink: 0;
+}
+
+.librarycard__find-card-title {
+  font-size: 30px;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+
+.form {
+  height: 386px;
+  margin-top: 30px;
+  border: 3px solid #bb945f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form__input-wrapper {
+  width: 560px;
+  height: 272px;
+  margin: 18px;
+  padding: 20px;
+  flex-shrink: 0;
+  background: #bb945f;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 22px;
+}
+
+.form__title {
+  font-family: Forum;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: 0.6px;
+}
+
+.form__input {
+  width: 520px;
+  height: 66px;
+  padding: 8px 20px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #8e8e8e;
+  font-family: Forum;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: 0.6px;
+}
+
+.form__button {
+  width: 242px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #0c0c0e;
+  background-color: #fff;
+  color: #0c0c0e;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  transition: 1s;
+}
+
+.librarycard__get-card {
+  width: 456px;
+  height: 253px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.librarycard__get-card-title {
+  text-align: center;
+  font-family: Forum;
+  font-size: 30px;
+  line-height: normal;
+  letter-spacing: 0.6px;
+}
+
+.librarycard__get-card-description {
+  width: 456px;
+  margin-top: 35px;
+  text-align: right;
+  letter-spacing: 0.4px;
+}
+
+.librarycard__get-card-button-block {
+  display: flex;
+  margin-top: 18px;
+  gap: 20px;
+}
+
+.librarycard__get-card-button {
+  width: 75px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #0c0c0e;
+  color: #0c0c0e;
+  background-color: #fff;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  transition: 1s;
+}
+
+.form__button:hover,
+.librarycard__get-card-button:hover {
+  border: 1px solid #bb945f;
+  background: #bb945f;
+  cursor: pointer;
 }
 
 .active {

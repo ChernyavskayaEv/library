@@ -246,7 +246,7 @@ h2 {
   background: #0c0c0e;
 }
 
-.welcome__title > p {
+.welcome__title > h6 {
   color: #fff;
   text-align: center;
   font-family: Forum;

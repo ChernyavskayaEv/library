@@ -267,6 +267,13 @@ h2 {
   transform: rotate(45deg);
 }
 
+.header__nav-btn_active span,
+.header__nav-btn_active span::before,
+.header__nav-btn_active span::after {
+  margin-top: 1px;
+  margin-left: -20px;
+}
+
 @media screen and (max-width: 1024px) {
   .header__nav {
     flex-direction: column;
@@ -289,7 +296,7 @@ h2 {
 
   .header__list {
     width: 100%;
-    margin: 40px 0 0 15px;
+    margin: 35px 0 0 15px;
     flex-direction: column;
     justify-content: center;
     gap: 30px;
@@ -390,10 +397,13 @@ h2 {
   height: 560px;
 }
 
+.arrow__button {
+  background: #fff;
+  margin: 42px 34px 0;
+}
+
 .arrow {
   display: none;
-  stroke-width: 3px;
-  stroke: #000;
 }
 
 .about__photo-gallery_item {
@@ -439,12 +449,6 @@ h2 {
     display: none;
   }
 
-  .arrow {
-    display: block;
-    margin: 290px 22px;
-    align-self: flex-start;
-  }
-
   .slider_4 {
     display: flex;
   }
@@ -453,6 +457,11 @@ h2 {
 @media screen and (max-width: 1050px) {
   .photo-gallery_2 {
     display: none;
+  }
+
+  .arrow {
+    display: block;
+    align-self: flex-start;
   }
 
   .about__slider {
@@ -465,8 +474,8 @@ h2 {
 }
 
 .favorites {
-  width: 1440px;
-  height: 1439px;
+  max-width: 1440px;
+  min-height: 1439px;
   margin: 0 auto;
   background: #fff;
 }
@@ -635,6 +644,22 @@ h2 {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+@media screen and (max-width: 1230px) {
+  .favorites {
+    margin: 25px auto;
+  }
+
+  .favorites__books {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .favorites__season {
+    gap: 55px;
+  }
 }
 
 .coffee-shop {

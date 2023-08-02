@@ -276,22 +276,21 @@ h2 {
 
 @media screen and (max-width: 1024px) {
   .header__nav {
-    flex-direction: column;
+    display: block;
+    position: fixed;
+    margin: 0;
+    box-sizing: border-box;
     width: 332px;
     height: 510px;
     background: #0c0c0e;
-    order: 1;
-    position: absolute;
-    top: 40px;
-    right: -20px;
-    transform: translateX(100%);
-    transition: transform 1s;
+    top: 65px;
+    right: -100%;
+    transition: right 1s;
+    z-index: 2;
   }
 
   .header__nav_active {
-    display: flex;
-    transform: translateX(0%);
-    transition: transform 1s;
+    right: 0;
   }
 
   .header__list {
@@ -475,6 +474,12 @@ h2 {
 
   .slider_5 {
     display: flex;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about__photo-gallery {
+    gap: 0px;
   }
 }
 
@@ -681,7 +686,7 @@ h2 {
 }
 
 .coffee-shop__menu {
-  max-width: 1440px;
+  max-width: 1400px;
   width: calc(100vw - 40px);
   min-height: 520px;
   margin: 40px auto;
@@ -775,15 +780,15 @@ h2 {
 }
 
 .contacts {
-  width: 1440px;
-  height: 575px;
+  max-width: 1440px;
+  min-height: 575px;
   margin: 0 auto;
   background: #fff;
 }
 
 .contacts__info-block {
   width: 100%;
-  height: 414px;
+  min-height: 414px;
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -852,9 +857,26 @@ h2 {
   position: relative;
 }
 
+@media screen and (max-width: 1250px) {
+  .contacts__info-block {
+    flex-direction: column;
+  }
+
+  .map {
+    align-self: center;
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .map {
+    width: 600px;
+  }
+}
+
 .librarycard {
-  width: 1440px;
-  height: 614px;
+  max-width: 1400px;
+  min-height: 614px;
   margin: 0 auto;
   background: #fff;
 }
@@ -998,6 +1020,33 @@ h2 {
   cursor: pointer;
 }
 
+@media screen and (max-width: 1250px) {
+  .librarycard {
+    margin-top: 40px;
+  }
+
+  .librarycard__card-block {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .librarycard__get-card {
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .librarycard__get-card-description {
+    text-align: center;
+    width: 550px;
+    margin-top: 40px;
+  }
+
+  .librarycard__get-card-button-block {
+    margin-top: 24px;
+  }
+}
+
 .footer {
   width: 100%;
   height: 250px;
@@ -1047,7 +1096,8 @@ h2 {
 }
 
 .footer-underline {
-  width: 1400px;
+  max-width: 1400px;
+  width: calc(100vw - 40px);
   height: 1px;
   background: #fff;
   margin: 30px 0 44px;
@@ -1097,6 +1147,20 @@ h2 {
 .school:hover::before,
 .my-github:hover::before {
   width: 100%;
+}
+
+@media screen and (max-width: 1250px) {
+  .footer {
+    margin-top: 9px;
+  }
+
+  .footer-year {
+    width: 175px;
+  }
+
+  .my-github {
+    width: 230px;
+  }
 }
 
 .active {

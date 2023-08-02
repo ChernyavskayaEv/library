@@ -398,6 +398,7 @@ h2 {
 }
 
 .arrow__button {
+  display: none;
   background: #fff;
   margin: 42px 34px 0;
 }
@@ -444,7 +445,7 @@ h2 {
   background-color: #000;
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1430px) {
   .photo-gallery_3 {
     display: none;
   }
@@ -457,6 +458,10 @@ h2 {
 @media screen and (max-width: 1050px) {
   .photo-gallery_2 {
     display: none;
+  }
+
+  .arrow__button {
+    display: block;
   }
 
   .arrow {
@@ -663,8 +668,8 @@ h2 {
 }
 
 .coffee-shop {
-  width: 1440px;
-  height: 841px;
+  max-width: 1440px;
+  min-height: 841px;
   margin: 0 auto;
   background: #fff;
 }
@@ -676,10 +681,12 @@ h2 {
 }
 
 .coffee-shop__menu {
-  width: 1400px;
-  height: 520px;
+  max-width: 1440px;
+  width: calc(100vw - 40px);
+  min-height: 520px;
   margin: 40px auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -733,6 +740,38 @@ h2 {
 .coffee-shop__menu-section:last-child .coffee-shop__item_name {
   width: 215px;
   text-align: end;
+}
+
+@media screen and (max-width: 1024px) {
+  .coffee-shop {
+    /* margin: 39px auto; */
+    margin-top: 39px;
+  }
+
+  .coffee-shop__menu {
+    flex-direction: column;
+  }
+
+  .coffee-shop__menu-section:first-child {
+    align-self: start;
+  }
+
+  .coffee-shop__menu-section:last-child {
+    align-self: end;
+    margin-top: 41px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .coffee-shop__description {
+    width: 730px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .coffee-shop__description {
+    width: inherit;
+  }
 }
 
 .contacts {

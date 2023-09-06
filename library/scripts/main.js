@@ -1,3 +1,4 @@
+//Carousel in the About block
 const photoGallerySlider = document.querySelector('.photo-gallery-slider');
 const sliderPaginationItems = photoGallerySlider.querySelectorAll(
   '.about__slider_item'
@@ -62,4 +63,31 @@ photoGallerySlider.addEventListener('click', (event) => {
   if (orderNewSlider === 5) {
     arrowSliderRight.setAttribute('disabled', 'disabled');
   }
+});
+
+//Slider in Favorites block
+const favoritesSeason = document.querySelector('.favorites__season');
+const favoritesBooks = document.querySelectorAll('.favorites__books');
+
+favoritesSeason.addEventListener('click', (event) => {
+  const season = event.target.id;
+  if (season) {
+    console.log(event.target.id);
+    favoritesBooks.forEach((books) => {
+      books.classList.add('opacity');
+      setTimeout(() => {
+        books.classList.add('hidden');
+        document.querySelector(`.${season}`).classList.remove('hidden');
+      }, 1000);
+    });
+    setTimeout(() => {
+      document.querySelector(`.${season}`).classList.remove('opacity');
+    }, 1100);
+  }
+});
+
+const form = document.querySelector('.form');
+
+form.addEventListener('click', (event) => {
+  event.preventDefault();
 });

@@ -546,18 +546,8 @@ h2 {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-}
-
-.winter {
-}
-
-.spring {
-}
-
-.summer {
-}
-
-.autumn {
+  opacity: 1;
+  transition: all 1s ease-in-out 0s;
 }
 
 .book {
@@ -672,6 +662,13 @@ h2 {
 
   .favorites__books {
     justify-content: center;
+  }
+
+  .favorites__season {
+    position: sticky;
+    top: 0px;
+    background: #fff;
+    z-index: 2;
   }
 }
 
@@ -1179,4 +1176,8 @@ h2 {
 
 .hidden {
   display: none;
+}
+
+.opacity {
+  opacity: 0;
 }

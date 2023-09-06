@@ -144,10 +144,6 @@ h2 {
 .header {
   width: 100%;
   background: #0c0c0e;
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1; */
 }
 
 .wrapper {
@@ -313,7 +309,6 @@ h2 {
 .welcome {
   width: 100%;
   height: 600px;
-  /* margin-top: 90px; */
   background: url(../img/welcome.jpeg) lightgray 50% / cover no-repeat;
 }
 
@@ -324,7 +319,6 @@ h2 {
 
 .welcome__gradient {
   height: 600px;
-  /* margin-top: 90px; */
   background: linear-gradient(
     180deg,
     #0c0c0e 0%,
@@ -387,6 +381,13 @@ h2 {
   text-align: center;
 }
 
+.photo-gallery-slider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .about__photo-gallery {
   display: flex;
   justify-content: space-between;
@@ -402,8 +403,27 @@ h2 {
   margin: 42px 34px 0;
 }
 
+.arrow__button:disabled {
+  cursor: not-allowed;
+}
+
 .arrow {
   display: none;
+}
+
+.about__photo-gallery_wrapper {
+  overflow: hidden;
+}
+
+.about__photo-gallery_items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  max-width: 1400px;
+  position: relative;
+  left: 0px;
+  transition: transform 2s ease-in-out;
 }
 
 .about__photo-gallery_item {
@@ -411,30 +431,23 @@ h2 {
   height: 560px;
 }
 
-.photo-gallery_4,
-.photo-gallery_5 {
-  display: none;
-}
-
 .about__slider {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   margin-top: 35px;
+  width: 78px;
+  overflow: hidden;
 }
 
 .about__slider_item {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   width: 26px;
   height: 26px;
   cursor: pointer;
-}
-
-.slider_4,
-.slider_5 {
-  display: none;
 }
 
 .about__pagination_button {
@@ -445,18 +458,18 @@ h2 {
 }
 
 @media screen and (max-width: 1430px) {
-  .photo-gallery_3 {
-    display: none;
+  .about__photo-gallery_items {
+    width: 925px;
   }
 
-  .slider_4 {
-    display: flex;
+  .about__slider {
+    width: 104px;
   }
 }
 
 @media screen and (max-width: 1050px) {
-  .photo-gallery_2 {
-    display: none;
+  .about__photo-gallery_items {
+    width: 450px;
   }
 
   .arrow__button {
@@ -469,11 +482,7 @@ h2 {
   }
 
   .about__slider {
-    margin-top: 20px;
-  }
-
-  .slider_5 {
-    display: flex;
+    width: 130px;
   }
 }
 
@@ -1165,6 +1174,7 @@ h2 {
 
 .active {
   background-color: #bb945f;
+  cursor: not-allowed;
 }
 
 .hidden {

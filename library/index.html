@@ -43,15 +43,177 @@
                 alt="icon_profile"
                 class="header__icon-img"
               />
-              <a href="#" class="header__nav-btn">
-                <span></span>
-              </a>
+              <div class="header__icon-name hidden">JS</div>
+            </div>
+            <a href="#" class="header__nav-btn">
+              <span></span>
+            </a>
+            <div class="profile__menu">
+              <div class="profile__menu-title">Profile</div>
+              <div class="profile__menu-underline"></div>
+              <div class="profile__menu-item log-in">Log In</div>
+              <div class="profile__menu-item register">Register</div>
+              <div class="profile__menu-item my-profile hidden">My profile</div>
+              <div class="profile__menu-item log-out hidden">Log Out</div>
             </div>
           </div>
         </div>
       </div>
     </header>
     <main class="main">
+      <div class="fixed-overlay fixed-overlay__modal hidden">
+        <div class="modal">
+          <form action="#" class="modal__login hidden">
+            <div class="modal__login_close-btn">
+              <img
+                src="./img/svg/close_btn.svg"
+                alt="icon_close"
+                class="icon_close"
+              />
+            </div>
+            <div class="modal__login_title">Login</div>
+
+            <label for="login-email" class="login-email"
+              >E-mail or readers card</label
+            >
+            <input
+              type="text"
+              id="login-email"
+              name="login"
+              class="login-email"
+            />
+            <label for="login-password" class="login-password">Password</label>
+            <input
+              type="text"
+              id="login-password"
+              name="login"
+              class="login-password"
+            />
+            <button type="submit" class="modal__login-button">Log In</button>
+            <div class="modal__login_footer">
+              <div class="modal__login_question">Don’t have an account?</div>
+              <div class="modal__login_register">Register</div>
+            </div>
+          </form>
+          <form action="#" class="modal__register hidden">
+            <div class="modal__register_close-btn">
+              <img
+                src="./img/svg/close_btn.svg"
+                alt="icon_close"
+                class="icon_close"
+              />
+            </div>
+            <div class="modal__register_title">Register</div>
+            <label for="register-first-name" class="register-first-name"
+              >First name</label
+            >
+            <input
+              type="text"
+              id="register-first-name"
+              name="register"
+              class="register-first-name"
+            />
+            <label for="register-last-name" class="register-last-name"
+              >Last name</label
+            >
+            <input
+              type="text"
+              id="register-last-name"
+              name="register"
+              class="register-last-name"
+            />
+            <label for="register-last-name" class="register-last-name"
+              >E-mail</label
+            >
+            <input
+              type="text"
+              id="register-email"
+              name="register"
+              class="register-email"
+            />
+            <label for="register-password" class="register-password"
+              >Password</label
+            >
+            <input
+              type="text"
+              id="register-password"
+              name="register"
+              class="register-password"
+            />
+            <button type="submit" class="modal__register-button">
+              Sign Up
+            </button>
+            <div class="modal__register_footer">
+              <div class="modal__register_question">
+                Already have an account?
+              </div>
+              <div class="modal__login_register">Login</div>
+            </div>
+          </form>
+          <div class="modal_profile">
+            <div class="modal__profile_close-btn">
+              <img
+                src="./img/svg/close_btn.svg"
+                alt="icon_close"
+                class="icon_close"
+              />
+            </div>
+            <div class="modal_profile__left-side">
+              <div class="modal_profile__initials">JS</div>
+              <div class="modal_profile__fullname">John Doe</div>
+            </div>
+            <div class="modal_profile__right-side">
+              <div class="modal_profile__title">My profile</div>
+              <div class="modal_profile__main-data">
+                <div class="modal_profile__block-visits">
+                  <div class="modal_profile__blocks-title">Visits</div>
+                  <img
+                    src="./img/svg/Union.svg"
+                    alt="icon_profile"
+                    class="icon_profile"
+                  />
+                  <div class="modal_profile__score-visits">23</div>
+                </div>
+                <div class="modal_profile__block-bonuses">
+                  <div class="modal_profile__blocks-title">Bonuses</div>
+                  <img
+                    src="./img/svg/Star1.svg"
+                    alt="icon_star"
+                    class="icon_star"
+                  />
+                  <div class="modal_profile__score-bonuses">1240</div>
+                </div>
+                <div class="modal_profile__block-books">
+                  <div class="modal_profile__blocks-title">Books</div>
+                  <img
+                    src="./img/svg/book.svg"
+                    alt="icon_books"
+                    class="icon_books"
+                  />
+                  <div class="modal_profile__score-books">2</div>
+                </div>
+              </div>
+              <div class="modal_profile__rented-books">
+                <div>Rented books</div>
+                <ul>
+                  <li>The Last Queen, Clive Irving</li>
+                  <li>Dominicana, Angie Cruz</li>
+                </ul>
+              </div>
+
+              <div class="modal_profile__card-data">
+                <div class="card-number-title">Card number</div>
+                <div class="card-number">F00234030</div>
+                <img
+                  src="./img/svg/icon_copy.svg"
+                  alt="icon_copy"
+                  class="icon_copy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <section class="welcome">
         <div class="wrapper">
           <div class="welcome__gradient">
@@ -729,25 +891,27 @@
                 <div class="librarycard__find-card-title">
                   Find your Library card
                 </div>
-                <form action="#" class="form">
-                  <div class="form__input-wrapper">
-                    <div class="form__title">Brooklyn Public Library</div>
+                <form action="#" class="form-library-card">
+                  <div class="form-library-card__input-wrapper">
+                    <div class="form-library-card__title">
+                      Brooklyn Public Library
+                    </div>
                     <input
                       type="text"
                       pattern="[a-zA-Z0-9- ]+"
                       placeholder="Reader's name"
                       name="name"
-                      class="form__input"
+                      class="form-library-card__input"
                     />
                     <input
                       type="text"
                       pattern="[a-zA-Z0-9-]+"
                       placeholder="Card number"
                       name="card-number"
-                      class="form__input"
+                      class="form-library-card__input"
                     />
                   </div>
-                  <button type="submit" class="form__button">
+                  <button type="submit" class="form-library-card__button">
                     Check the card
                   </button>
                 </form>
@@ -831,8 +995,8 @@
         </div>
       </div>
     </footer>
-    <script src="./scripts/main.js"></script>
-    <!-- <script src="./scripts/index.js"></script>
-    <script src="./scripts/score.js"></script> -->
+
+    <script src="./scripts/index.js"></script>
+    <!-- <script src="./scripts/score.js"></script> -->
   </body>
 </html>

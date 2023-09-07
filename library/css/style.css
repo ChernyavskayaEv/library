@@ -217,6 +217,19 @@ h2 {
   flex-shrink: 0;
 }
 
+.header__icon-name {
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: #bb945f;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header__nav-btn {
   display: none;
   width: 45px;
@@ -270,6 +283,338 @@ h2 {
   margin-left: -20px;
 }
 
+.profile__menu {
+  width: 80px;
+  height: 115px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  top: 85px;
+  right: -100%;
+  transition: right 1s;
+  z-index: 2;
+}
+
+.profile__menu-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 5px 16px;
+}
+
+.profile__menu-underline {
+  width: 40px;
+  height: 1px;
+  background: #bb945f;
+  margin-bottom: 5px;
+}
+
+.profile__menu-item {
+  text-align: center;
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 9px;
+}
+
+.fixed-overlay {
+  position: fixed;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.fixed-overlay__modal {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.fixed-overlay__modal::after {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 100%;
+  content: '';
+}
+
+.modal {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.modal__login,
+.modal__register {
+  width: 250px;
+  min-height: 262px;
+  padding-left: 25px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  position: relative;
+}
+
+.modal__register {
+  min-height: 382px;
+}
+
+.modal__login_title,
+.modal__register_title {
+  text-align: center;
+  font-family: Forum;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin: 20px 72px;
+}
+
+.modal__register_title {
+  margin: 20px 60px;
+}
+
+.modal__login_close-btn,
+.modal__register_close-btn {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 12px;
+  right: 17px;
+}
+
+.modal__login > label,
+.modal__register > label {
+  text-align: center;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+}
+
+.modal__login > input,
+.modal__register > input {
+  width: 200px;
+  height: 20px;
+  border: 1px solid #bb945f;
+  margin: 10px 0;
+}
+
+.modal__login-button,
+.modal__register-button {
+  width: 75px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #0c0c0e;
+  color: #0c0c0e;
+  background-color: #fff;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  transition: 1s;
+}
+
+.modal__login-button:hover,
+.modal__register-button:hover {
+  border: 1px solid #bb945f;
+  background: #bb945f;
+  cursor: pointer;
+}
+
+.modal__login_footer,
+.modal__register_footer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal__login_question,
+.modal__register_question {
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+  font-size: 10px;
+  line-height: normal;
+}
+.modal__login_register {
+  color: #0c0c0e;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+}
+
+.modal_profile {
+  width: 600px;
+  height: 400px;
+  background: #fff;
+  display: flex;
+  position: relative;
+}
+
+.modal__profile_close-btn {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 22px;
+  right: 27px;
+}
+
+.modal_profile__left-side {
+  width: 170px;
+  height: 100%;
+  flex-shrink: 0;
+  background: #0c0c0e;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.modal_profile__initials {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: #fff;
+  color: #bb945f;
+  text-align: center;
+  line-height: 20px;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 139px;
+}
+
+.modal_profile__fullname {
+  width: 120px;
+  min-height: 30px;
+  flex-shrink: 0;
+  background: #fff;
+  color: #000;
+  line-height: 20px;
+  margin-top: 16px;
+}
+.modal_profile__right-side {
+  width: 430px;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 20px;
+}
+
+.modal_profile__title {
+  text-align: center;
+  font-family: Forum;
+  font-size: 40px;
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin: 40px 0;
+}
+
+.modal_profile__main-data {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal_profile__block-visits {
+}
+
+.modal_profile__block-bonuses {
+}
+
+.modal_profile__block-books {
+}
+
+.modal_profile__blocks-title {
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+}
+
+.icon_profile,
+.icon_star,
+.icon_books {
+  width: 20px;
+  height: 21px;
+  margin: 10px;
+}
+
+.modal_profile__score-visits,
+.modal_profile__score-bonuses,
+.modal_profile__score-books {
+  text-align: center;
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+}
+.modal_profile__rented-books {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.modal_profile__rented-books > div {
+  color: #0c0c0e;
+  font-size: 25px;
+  line-height: 20px;
+  margin: 20px 0 24px;
+}
+
+.modal_profile__rented-books > ul li {
+  list-style: disc;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  margin: 7px 0 0 29px;
+  text-align: start;
+}
+
+.modal_profile__card-data {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.card-number-title {
+  color: #0c0c0e;
+  text-align: center;
+  line-height: 20px;
+}
+
+.card-number {
+  color: #bb945f;
+  text-align: center;
+  line-height: 20px;
+}
+.icon_copy {
+  width: 13.31px;
+  height: 12px;
+}
+
 @media screen and (max-width: 1024px) {
   .header__nav {
     display: block;
@@ -279,7 +624,7 @@ h2 {
     width: 332px;
     height: 510px;
     background: #0c0c0e;
-    top: 65px;
+    top: 85px;
     right: -100%;
     transition: right 1s;
     z-index: 2;
@@ -299,10 +644,6 @@ h2 {
 
   .header__nav-btn {
     display: inline-block;
-  }
-
-  .header__nav-btn_active {
-    margin-left: 25px;
   }
 }
 
@@ -908,7 +1249,7 @@ h2 {
   text-align: center;
 }
 
-.form {
+.form-library-card {
   height: 386px;
   margin-top: 30px;
   border: 3px solid #bb945f;
@@ -917,7 +1258,7 @@ h2 {
   align-items: center;
 }
 
-.form__input-wrapper {
+.form-library-card__input-wrapper {
   width: 560px;
   height: 272px;
   margin: 18px;
@@ -930,14 +1271,14 @@ h2 {
   gap: 22px;
 }
 
-.form__title {
+.form-library-card__title {
   font-family: Forum;
   font-size: 30px;
   line-height: 50px;
   letter-spacing: 0.6px;
 }
 
-.form__input {
+.form-library-card__input {
   width: 520px;
   height: 66px;
   padding: 8px 20px;
@@ -951,7 +1292,7 @@ h2 {
   letter-spacing: 0.6px;
 }
 
-.form__button {
+.form-library-card__button {
   width: 242px;
   height: 44px;
   flex-shrink: 0;

@@ -117,8 +117,8 @@ favoritesSeason.addEventListener('click', (event) => {
   }
 });
 
-const form = document.querySelector('.form');
+// const form = document.querySelector('.form');
 
-form.addEventListener('click', (event) => {
-  event.preventDefault();
-});
+// form.addEventListener('click', (event) => {
+//   event.preventDefault();
+// });

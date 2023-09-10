@@ -295,7 +295,11 @@ h2 {
   top: 85px;
   right: -100%;
   transition: right 1s;
-  z-index: 2;
+  z-index: 5;
+}
+
+.profile__menu_active {
+  right: 0;
 }
 
 .profile__menu-title {
@@ -317,6 +321,7 @@ h2 {
   font-size: 15px;
   line-height: 20px;
   margin-top: 9px;
+  cursor: pointer;
 }
 
 .fixed-overlay {
@@ -328,6 +333,8 @@ h2 {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  transition: all 1s ease-in-out;
 }
 
 .fixed-overlay__modal {
@@ -359,6 +366,8 @@ h2 {
   justify-content: start;
   align-items: start;
   position: relative;
+  opacity: 1;
+  transition: all 1s ease-in-out;
 }
 
 .modal__register {
@@ -404,6 +413,21 @@ h2 {
   border: 1px solid #bb945f;
   margin: 10px 0;
   padding: 1px 4px;
+}
+
+.modal__login > input::placeholder,
+.modal__register > input::placeholder {
+  opacity: 0;
+}
+
+.modal__login > input.error,
+.modal__register > input.error {
+  border: 1px solid #be491a;
+}
+
+.modal__login > input.error::placeholder,
+.modal__register > input.error::placeholder {
+  opacity: 0.3;
 }
 
 .modal__login-button,
@@ -456,6 +480,7 @@ h2 {
   line-height: normal;
   letter-spacing: 1px;
   text-decoration-line: underline;
+  cursor: pointer;
 }
 
 .modal_profile {
@@ -464,6 +489,8 @@ h2 {
   background: #fff;
   display: flex;
   position: relative;
+  opacity: 1;
+  transition: all 1s ease-in-out;
 }
 
 .modal__profile_close-btn {
@@ -617,6 +644,8 @@ h2 {
   justify-content: start;
   align-items: center;
   position: relative;
+  opacity: 1;
+  transition: all 1s ease-in-out;
 }
 
 .modal__buy-card_close-btn {
@@ -765,7 +794,7 @@ input[type='number'] {
     top: 85px;
     right: -100%;
     transition: right 1s;
-    z-index: 2;
+    z-index: 5;
   }
 
   .header__nav_active {
@@ -1568,18 +1597,21 @@ input[type='number'] {
     align-items: center;
   }
 
-  .librarycard__get-card {
+  .librarycard__get-card,
+  .librarycard__visit-profile {
     align-items: center;
     margin-top: 20px;
   }
 
-  .librarycard__get-card-description {
+  .librarycard__get-card-description,
+  .librarycard__visit-profile-description {
     text-align: center;
     width: 550px;
     margin-top: 40px;
   }
 
-  .librarycard__get-card-button-block {
+  .librarycard__get-card-button-block,
+  .librarycard__visit-profile-button-block {
     margin-top: 24px;
   }
 }

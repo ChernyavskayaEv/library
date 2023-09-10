@@ -50,6 +50,7 @@
             </a>
             <div class="profile__menu">
               <div class="profile__menu-title">Profile</div>
+              <div class="profile__menu-card hidden">003F0D481</div>
               <div class="profile__menu-underline"></div>
               <div class="profile__menu-item log-in">Log In</div>
               <div class="profile__menu-item register">Register</div>
@@ -180,7 +181,7 @@
                   <img
                     src="./img/svg/Union.svg"
                     alt="icon_profile"
-                    class="icon_profile"
+                    class="modal_profile__icon_profile"
                   />
                   <div class="modal_profile__score-visits">23</div>
                 </div>
@@ -189,7 +190,7 @@
                   <img
                     src="./img/svg/Star1.svg"
                     alt="icon_star"
-                    class="icon_star"
+                    class="modal_profile__icon_star"
                   />
                   <div class="modal_profile__score-bonuses">1240</div>
                 </div>
@@ -198,14 +199,14 @@
                   <img
                     src="./img/svg/book.svg"
                     alt="icon_books"
-                    class="icon_books"
+                    class="modal_profile__icon_books"
                   />
                   <div class="modal_profile__score-books">2</div>
                 </div>
               </div>
               <div class="modal_profile__rented-books">
                 <div>Rented books</div>
-                <ul>
+                <ul class="list-books">
                   <li>The Last Queen, Clive Irving</li>
                   <li>Dominicana, Angie Cruz</li>
                 </ul>
@@ -240,7 +241,7 @@
                   type="number"
                   id="number-card"
                   name="number-card"
-                  class="number-card-data"
+                  class="number-card-data card-req"
                 />
                 <label for="expiration-code" class="expiration-code-title"
                   >Expiration code</label
@@ -250,12 +251,12 @@
                     type="number"
                     id="expiration-code"
                     name="expiration-code-month"
-                    class="expiration-code-data-month"
+                    class="expiration-code-data-month card-req"
                   />
                   <input
                     type="number"
                     name="buy-card-year"
-                    class="expiration-code-data-year"
+                    class="expiration-code-data-year card-req"
                   />
                 </div>
 
@@ -264,7 +265,7 @@
                   type="number"
                   id="cvc-card"
                   name="cvc-card"
-                  class="cvc-card-data"
+                  class="cvc-card-data card-req"
                 />
                 <label for="cardholder" class="cardholder-title"
                   >Cardholder name</label
@@ -273,7 +274,7 @@
                   type="text"
                   id="cardholder"
                   name="cardholder"
-                  class="cardholder-data"
+                  class="cardholder-data card-req"
                 />
                 <label for="postal-code-card" class="postal-code-card-title"
                   >Postal code</label
@@ -282,14 +283,14 @@
                   type="number"
                   id="postal-code-card"
                   name="postal-code"
-                  class="postal-code-card-data"
+                  class="postal-code-card-data card-req"
                 />
                 <label for="location" class="location-title">City / Town</label>
                 <input
                   type="text"
                   id="location"
                   name="location"
-                  class="location-data"
+                  class="location-data card-req"
                 />
                 <div class="block-buy-card">
                   <button type="submit" class="buy-card-button">Buy</button>
@@ -993,7 +994,6 @@
                     </div>
                     <input
                       type="text"
-                      pattern="[a-zA-Z0-9- ]+"
                       placeholder="Reader's name"
                       name="name"
                       class="form-library-card__input"
@@ -1001,7 +1001,6 @@
                     />
                     <input
                       type="text"
-                      pattern="[a-zA-Z0-9-]+"
                       placeholder="Card number"
                       name="card-number"
                       class="form-library-card__input"
@@ -1138,6 +1137,6 @@
     </footer>
 
     <script src="./scripts/index.js"></script>
-    <!-- <script src="./scripts/score.js"></script> -->
+    <script src="./scripts/score.js"></script>
   </body>
 </html>

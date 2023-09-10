@@ -215,6 +215,7 @@ h2 {
   width: 28px;
   height: 28px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .header__icon-name {
@@ -228,6 +229,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .header__nav-btn {
@@ -304,6 +306,13 @@ h2 {
 
 .profile__menu-title {
   font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 5px 16px;
+}
+
+.profile__menu-card {
+  font-size: 10px;
   font-weight: 700;
   line-height: 20px;
   margin: 5px 16px;
@@ -529,13 +538,15 @@ h2 {
 }
 
 .modal_profile__fullname {
-  width: 120px;
+  min-width: 120px;
+  max-width: 150px;
   min-height: 30px;
   flex-shrink: 0;
   background: #fff;
   color: #000;
-  line-height: 20px;
+  line-height: 30px;
   margin-top: 16px;
+  white-space: initial;
 }
 .modal_profile__right-side {
   width: 430px;
@@ -571,9 +582,9 @@ h2 {
   letter-spacing: 0.4px;
 }
 
-.icon_profile,
-.icon_star,
-.icon_books {
+.modal_profile__icon_profile,
+.modal_profile__icon_star,
+.modal_profile__icon_books {
   width: 20px;
   height: 21px;
   margin: 10px;
@@ -712,6 +723,10 @@ h2 {
   margin-bottom: 10px;
   padding: 1px 4px;
   appearance: none;
+}
+
+.buy-card__left-side input.error {
+  border: 1px solid #be491a;
 }
 
 input[type='number'] {

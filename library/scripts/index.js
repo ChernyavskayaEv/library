@@ -67,6 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
   //consts for slider in Favorites block
   const favoritesBooks = document.querySelectorAll('.favorites__books');
 
+  //consts for profile-menu
+  const iconInitialsUser = document.querySelector('.header__icon-name');
+  const iconImg = document.querySelector('.header__icon-img');
+  const profileMenuTitle = document.querySelector('.profile__menu-title');
+  const profileMenuCard = document.querySelector('.profile__menu-card');
+  const profileMenuLogIn = document.querySelector('.log-in');
+  const profileMenuRegister = document.querySelector('.register');
+  const profileMenuProfile = document.querySelector('.my-profile');
+  const profileMenuLogOut = document.querySelector('.log-out');
+
   //--------
   bodyContent.addEventListener('click', (event) => {
     console.log(event.target);
@@ -98,7 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (
       event.target.closest('.log-in') ||
       event.target.closest('.librarycard__login-button') ||
-      event.target.classList.contains('book__button')
+      (event.target.classList.contains('book__button') &&
+        !document
+          .querySelector('.profile__menu-title')
+          .classList.contains('hidden'))
     ) {
       openModalLogin();
     }
@@ -125,6 +138,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    //Modal window My Profile
+    if (event.target.classList.contains('my-profile')) {
+      fixedOverlay.classList.remove('hidden');
+      modalProfile.classList.remove('hidden');
+      setTimeout(() => {
+        fixedOverlay.classList.remove('opacity');
+        modalProfile.classList.remove('opacity');
+      }, 100);
+    }
+
+    //Modal window Buy Card
+    if (
+      event.target.classList.contains('book__button') &&
+      !iconInitialsUser.classList.contains('hidden') &&
+      !iconInitialsUser.classList.contains('buyCardTrue')
+    ) {
+      fixedOverlay.classList.remove('hidden');
+      modalBuyCard.classList.remove('hidden');
+      setTimeout(() => {
+        fixedOverlay.classList.remove('opacity');
+        modalBuyCard.classList.remove('opacity');
+      }, 100);
+    }
+
     //closing modal windows
     if (
       event.target.classList.contains('fixed-overlay') ||
@@ -133,7 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModalWindows();
     }
 
-    //Carousel in the About block
+    //copy user card
+    if (event.target.classList.contains('icon_copy')) {
+      let cardNumber = document.querySelector('.card-number').innerHTML;
+      navigator.clipboard.writeText(cardNumber);
+    }
+
+    //Carousel in the About block (1 stage)
     if (event.target.closest('.about')) {
       let activeSlider = document.querySelector('.active');
 
@@ -194,9 +237,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    //Slider in Favorites block
-    const season = event.target.id;
-    if (season) {
+    //Slider in Favorites block (1 stage)
+
+    if (
+      event.target.id === 'winter' ||
+      event.target.id === 'spring' ||
+      event.target.id === 'summer' ||
+      event.target.id === 'autumn'
+    ) {
+      const season = event.target.id;
       favoritesBooks.forEach((books) => {
         books.classList.add('opacity');
         setTimeout(() => {
@@ -236,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.books = [];
       this.visits = 1;
       this.bonuses = 0;
+      this.buyCard = false;
     }
   }
 
@@ -263,7 +313,147 @@ document.addEventListener('DOMContentLoaded', () => {
     return JSON.parse(userData);
   };
 
-  //registering
+  //active account
+
+  const activeAccount = (user) => {
+    let initialsUser = `${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`;
+
+    iconImg.classList.add('hidden');
+    iconInitialsUser.textContent = initialsUser;
+    iconInitialsUser.setAttribute(
+      'title',
+      `${user.first_name} ${user.last_name}`
+    );
+    iconInitialsUser.classList.remove('hidden');
+
+    profileMenuTitle.classList.add('hidden');
+    profileMenuLogIn.classList.add('hidden');
+    profileMenuRegister.classList.add('hidden');
+    profileMenuCard.classList.remove('hidden');
+    profileMenuProfile.classList.remove('hidden');
+    profileMenuLogOut.classList.remove('hidden');
+
+    fillMyProfile(user);
+
+    logOut(user);
+
+    //buy library card
+    const formBuyCard = document.querySelector('.modal__buy-card');
+
+    const buyingCard = (event) => {
+      event.preventDefault();
+
+      let errorBuyCard = formBuyCardValidate(formBuyCard);
+
+      if (errorBuyCard === 0) {
+        user.buyCard = true;
+        iconInitialsUser.classList.add('buyCardTrue');
+        saveUser(user);
+        formBuyCard.reset();
+        closeModalWindows();
+      }
+    };
+
+    const formBuyCardValidate = (formBuyCard) => {
+      let error = 0;
+      let buyCardReqs = document.querySelectorAll('.card-req');
+
+      for (let buyCardReq of buyCardReqs) {
+        formRemoveError(buyCardReq);
+        if (
+          buyCardReq.classList.contains('number-card-data') &&
+          [...buyCardReq.value].length !== 16
+        ) {
+          formAddError(buyCardReq);
+          error++;
+        } else if (
+          buyCardReq.classList.contains('expiration-code-data-month') &&
+          [...buyCardReq.value].length !== 2
+        ) {
+          formAddError(buyCardReq);
+          error++;
+        } else if (
+          buyCardReq.classList.contains('expiration-code-data-year') &&
+          [...buyCardReq.value].length !== 2
+        ) {
+          formAddError(buyCardReq);
+          error++;
+        } else if (
+          buyCardReq.classList.contains('cvc-card-data') &&
+          [...buyCardReq.value].length !== 3
+        ) {
+          formAddError(buyCardReq);
+          error++;
+        } else {
+          if (buyCardReq.value === '') {
+            formAddError(buyCardReq);
+            error++;
+          }
+        }
+      }
+      return error;
+    };
+
+    formBuyCard.addEventListener('submit', buyingCard);
+
+    //buy books
+  };
+
+  //fill My Profile
+  const modalProfileInitials = document.querySelector(
+    '.modal_profile__initials'
+  );
+  const modalProfilefullName = document.querySelector(
+    '.modal_profile__fullname'
+  );
+  const modalProfileScoreVisitsisits = document.querySelector(
+    '.modal_profile__score-visits'
+  );
+  const modalProfileScoreBonuses = document.querySelector(
+    '.modal_profile__score-bonuses'
+  );
+  const modalProfileScoreBooks = document.querySelector(
+    '.modal_profile__score-books'
+  );
+  const modalProfileListBooks = document.querySelector('.list-books');
+  const modalProfileCardNumber = document.querySelector('.card-number');
+
+  const fillMyProfile = (user) => {
+    modalProfileInitials.textContent = `${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`;
+    modalProfilefullName.textContent = `${user.first_name} ${user.last_name}`;
+    modalProfileScoreVisitsisits.textContent = user.visits;
+    modalProfileScoreBonuses.textContent = user.bonuses;
+    modalProfileScoreBooks.textContent = user.books.length;
+    if (user.buyCard) {
+      iconInitialsUser.classList.add('buyCardTrue');
+    }
+    if (user.books.length > 0) {
+      console.log([...user.books]);
+    }
+    if (user.books.length === 0) {
+      modalProfileListBooks.textContent = '';
+    }
+    modalProfileCardNumber.textContent = user.cardNumber;
+  };
+
+  //log out
+  const logOut = (user) => {
+    profileMenuLogOut.addEventListener('click', (event) => {
+      iconImg.classList.remove('hidden');
+      iconInitialsUser.textContent = '';
+      iconInitialsUser.removeAttribute('title');
+      iconInitialsUser.classList.add('hidden');
+      iconInitialsUser.classList.remove('buyCardTrue');
+      profileMenuTitle.classList.remove('hidden');
+      profileMenuLogIn.classList.remove('hidden');
+      profileMenuRegister.classList.remove('hidden');
+      profileMenuCard.classList.add('hidden');
+      profileMenuProfile.classList.add('hidden');
+      profileMenuLogOut.classList.add('hidden');
+    });
+  };
+
+  //registering (2 stage)
   const formRegister = document.querySelector('.modal__register');
 
   const registering = (event) => {
@@ -280,11 +470,10 @@ document.addEventListener('DOMContentLoaded', () => {
         email: registeringData.get('register-email'),
         password: registeringData.get('register-password'),
       });
-      console.log(user);
       saveUser(user);
       formRegister.reset();
       closeModalWindows();
-      //дописать то что происходит при авторизации
+      activeAccount(user);
     }
   };
 
@@ -318,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   formRegister.addEventListener('submit', registering);
 
-  //authorization
+  //authorization (3 stage)
   const formLogIn = document.querySelector('.modal__login');
 
   const authorization = (event) => {
@@ -329,7 +518,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let authorizationData = new FormData(formLogIn);
 
     if (errorAuthorization === 0) {
-      console.log(authorizationData);
       let emailOrCard = authorizationData.get('login-email-or-card');
       let password = authorizationData.get('login-password');
       let authorizedUser = getUser(emailOrCard);
@@ -339,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
         saveUser(authorizedUser);
         formLogIn.reset();
         closeModalWindows();
-        //дописать то что происходит при авторизации
+        activeAccount(authorizedUser);
       }
     }
   };

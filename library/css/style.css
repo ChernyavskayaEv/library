@@ -158,6 +158,7 @@ h2 {
   align-items: center;
   justify-content: space-between;
   height: 90px;
+  position: relative;
 }
 
 .header__wrapper-link {
@@ -235,7 +236,7 @@ h2 {
 .header__nav-btn {
   display: none;
   width: 45px;
-  height: 20px;
+  height: 45px;
   margin-left: 35px;
   position: relative;
   transition: 1s;
@@ -285,16 +286,25 @@ h2 {
   margin-left: -20px;
 }
 
-.profile__menu {
+.profile-wrapper {
   width: 80px;
   height: 115px;
+  overflow: hidden;
+  position: absolute;
+  top: 70px;
+  right: 0;
+}
+
+.profile__menu {
+  width: 100%;
+  height: 100%;
   background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  position: fixed;
-  top: 85px;
+  position: absolute;
+  top: 0;
   right: -100%;
   transition: right 1s;
   z-index: 5;
@@ -432,6 +442,7 @@ h2 {
 .modal__login > input.error,
 .modal__register > input.error {
   border: 1px solid #be491a;
+  background-color: rgba(189, 72, 26, 0.1);
 }
 
 .modal__login > input.error::placeholder,
@@ -646,6 +657,13 @@ h2 {
   height: 12px;
 }
 
+.icon_copy:hover {
+  filter: invert(50%) sepia(8000%) saturate(120%) hue-rotate(-5deg)
+    brightness(87%) contrast(153%);
+  -webkit-filter: invert(50%) sepia(8000%) saturate(120%) hue-rotate(-5deg)
+    brightness(87%) contrast(153%);
+}
+
 .modal__buy-card {
   width: 640px;
   height: 540px;
@@ -727,6 +745,7 @@ h2 {
 
 .buy-card__left-side input.error {
   border: 1px solid #be491a;
+  background-color: rgba(189, 72, 26, 0.1);
 }
 
 input[type='number'] {
@@ -928,6 +947,13 @@ input[type='number'] {
 
 .arrow__button:disabled {
   cursor: not-allowed;
+}
+
+.arrow__button:disabled > img {
+  filter: invert(50%) sepia(8000%) saturate(120%) hue-rotate(-5deg)
+    brightness(87%) contrast(153%);
+  -webkit-filter: invert(50%) sepia(8000%) saturate(120%) hue-rotate(-5deg)
+    brightness(87%) contrast(153%);
 }
 
 .arrow {

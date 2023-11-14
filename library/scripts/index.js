@@ -22,6 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalRegister = document.querySelector('.modal__register');
   const modalProfile = document.querySelector('.modal_profile');
   const modalBuyCard = document.querySelector('.modal__buy-card');
+  const logInReqs = document.querySelectorAll('.login-req');
+  const registerReqs = document.querySelectorAll('.register-req');
+  const buyCardReqs = document.querySelectorAll('.card-req');
+
+  const formRemoveError = (validatedField) => {
+    validatedField.classList.remove('error');
+  };
+
+  const removeError = (fieldsError) => {
+    for (let fieldError of fieldsError) {
+      formRemoveError(fieldError);
+    }
+  };
 
   const openModalLogin = () => {
     fixedOverlay.classList.remove('hidden');
@@ -81,20 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
   bodyContent.addEventListener('click', (event) => {
     console.log(event.target);
 
+    hiddenProfileMenu();
+
     //burger menu
     if (event.target.closest('.header__nav-btn')) {
       event.preventDefault();
-      hiddenProfileMenu();
       headerNavBtn.classList.toggle('header__nav-btn_active');
       nav.classList.toggle('header__nav_active');
-    }
-    if (
-      event.target.closest('.header__link') ||
-      event.target.closest('.main') ||
-      event.target.closest('.profile__menu-item')
-    ) {
+    } else {
       hiddenNav();
-      hiddenProfileMenu();
     }
 
     //Authorization menu when clicking on the user icon
@@ -113,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .querySelector('.profile__menu-title')
           .classList.contains('hidden'))
     ) {
+      modalLogIn.reset();
+      removeError(logInReqs);
       openModalLogin();
     }
 
@@ -121,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
       event.target.closest('.register') ||
       event.target.closest('.librarycard__signup-button')
     ) {
+      modalRegister.reset();
+      removeError(registerReqs);
+
       openModalRegister();
     }
 
@@ -154,6 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
       !iconInitialsUser.classList.contains('hidden') &&
       !iconInitialsUser.classList.contains('buyCardTrue')
     ) {
+      modalBuyCard.reset();
+      removeError(buyCardReqs);
+
       fixedOverlay.classList.remove('hidden');
       modalBuyCard.classList.remove('hidden');
       setTimeout(() => {
@@ -196,14 +212,12 @@ document.addEventListener('DOMContentLoaded', () => {
           [...sliderPaginationItems].findIndex(
             (item) => item == event.target.closest('.about__slider_item')
           ) + 1;
-      }
-
-      if (event.target.closest('.left')) {
+      } else if (event.target.closest('.left')) {
         orderNewSlider = orderActiveSlider - 1;
-      }
-
-      if (event.target.closest('.right')) {
+      } else if (event.target.closest('.right')) {
         orderNewSlider = orderActiveSlider + 1;
+      } else {
+        return;
       }
 
       let necessaryShiftSlider = orderNewSlider - orderActiveSlider;
@@ -229,10 +243,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (orderNewSlider === 1) {
+        arrowSliderRight.removeAttribute('disabled');
         arrowSliderLeft.setAttribute('disabled', 'disabled');
       }
 
       if (orderNewSlider === 5) {
+        arrowSliderLeft.removeAttribute('disabled');
         arrowSliderRight.setAttribute('disabled', 'disabled');
       }
     }
@@ -338,25 +354,20 @@ document.addEventListener('DOMContentLoaded', () => {
     logOut(user);
 
     //buy library card
-    const formBuyCard = document.querySelector('.modal__buy-card');
-
-    const buyingCard = (event) => {
+    modalBuyCard.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      let errorBuyCard = formBuyCardValidate(formBuyCard);
-
-      if (errorBuyCard === 0) {
+      if (formBuyCardValidate() === 0) {
         user.buyCard = true;
         iconInitialsUser.classList.add('buyCardTrue');
         saveUser(user);
-        formBuyCard.reset();
+        modalBuyCard.reset();
         closeModalWindows();
       }
-    };
+    });
 
-    const formBuyCardValidate = (formBuyCard) => {
+    const formBuyCardValidate = () => {
       let error = 0;
-      let buyCardReqs = document.querySelectorAll('.card-req');
 
       for (let buyCardReq of buyCardReqs) {
         formRemoveError(buyCardReq);
@@ -393,8 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return error;
     };
-
-    formBuyCard.addEventListener('submit', buyingCard);
 
     //buy books
   };
@@ -454,16 +463,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   //registering (2 stage)
-  const formRegister = document.querySelector('.modal__register');
-
-  const registering = (event) => {
+  modalRegister.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    let errorRegister = formRegisterValidate(formRegister);
+    let registeringData = new FormData(modalRegister);
 
-    let registeringData = new FormData(formRegister);
-
-    if (errorRegister === 0) {
+    if (formRegisterValidate() === 0) {
       const user = new User({
         first_name: registeringData.get('register-first-name'),
         last_name: registeringData.get('register-last-name'),
@@ -471,15 +476,14 @@ document.addEventListener('DOMContentLoaded', () => {
         password: registeringData.get('register-password'),
       });
       saveUser(user);
-      formRegister.reset();
+      modalRegister.reset();
       closeModalWindows();
       activeAccount(user);
     }
-  };
+  });
 
-  const formRegisterValidate = (formRegister) => {
+  const formRegisterValidate = () => {
     let error = 0;
-    let registerReqs = document.querySelectorAll('.register-req');
 
     for (let registerReq of registerReqs) {
       formRemoveError(registerReq);
@@ -505,19 +509,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return error;
   };
 
-  formRegister.addEventListener('submit', registering);
-
   //authorization (3 stage)
-  const formLogIn = document.querySelector('.modal__login');
-
-  const authorization = (event) => {
+  modalLogIn.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    let errorAuthorization = formLogInValidate(formLogIn);
+    let authorizationData = new FormData(modalLogIn);
 
-    let authorizationData = new FormData(formLogIn);
-
-    if (errorAuthorization === 0) {
+    if (formLogInValidate() === 0) {
       let emailOrCard = authorizationData.get('login-email-or-card');
       let password = authorizationData.get('login-password');
       let authorizedUser = getUser(emailOrCard);
@@ -525,16 +523,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (authorizedUser && authorizedUser.password === password) {
         authorizedUser.visits += 1;
         saveUser(authorizedUser);
-        formLogIn.reset();
+        modalLogIn.reset();
         closeModalWindows();
         activeAccount(authorizedUser);
       }
     }
-  };
+  });
 
-  const formLogInValidate = (formLogIn) => {
+  const formLogInValidate = () => {
     let error = 0;
-    let logInReqs = document.querySelectorAll('.login-req');
 
     for (let logInReq of logInReqs) {
       formRemoveError(logInReq);
@@ -555,14 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return error;
   };
 
-  formLogIn.addEventListener('submit', authorization);
-
   const formAddError = (validatedField) => {
     validatedField.classList.add('error');
-  };
-
-  const formRemoveError = (validatedField) => {
-    validatedField.classList.remove('error');
   };
 
   const emailTest = (validatedField) => {
@@ -574,8 +565,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form-library-card');
 
   form.addEventListener('click', (event) => {
-    console.log(event.target);
-
     event.preventDefault();
   });
 });

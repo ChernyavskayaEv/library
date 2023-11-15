@@ -505,7 +505,7 @@ h2 {
 
 .modal_profile {
   width: 600px;
-  height: 400px;
+  height: max-content;
   background: #fff;
   display: flex;
   position: relative;
@@ -524,7 +524,6 @@ h2 {
 
 .modal_profile__left-side {
   width: 170px;
-  height: 100%;
   flex-shrink: 0;
   background: #0c0c0e;
   display: flex;
@@ -624,13 +623,21 @@ h2 {
   margin: 20px 0 24px;
 }
 
+.list-books {
+  max-height: 130px;
+  overflow-y: scroll;
+  padding: 5px 0;
+}
+
 .modal_profile__rented-books > ul li {
   list-style: disc;
-  line-height: 20px;
+  line-height: 25px;
   letter-spacing: 2px;
   text-transform: capitalize;
   margin: 7px 0 0 29px;
   text-align: start;
+  width: 360px;
+  white-space: normal;
 }
 
 .modal_profile__card-data {
@@ -638,7 +645,7 @@ h2 {
   justify-content: start;
   align-items: center;
   gap: 15px;
-  margin-top: 40px;
+  margin: 40px 0 20px;
 }
 
 .card-number-title {
@@ -1096,7 +1103,7 @@ input[type='number'] {
   justify-content: space-between;
   align-items: center;
   opacity: 1;
-  transition: all 1s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
 }
 
 .book {

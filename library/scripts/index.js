@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('winter').checked = true;
+  document.getElementById('spring').checked = false;
+  document.getElementById('summer').checked = false;
+  document.getElementById('autumn').checked = false;
+
   //consts for burger menu
   const nav = document.querySelector('.header__nav');
   const bodyContent = document.querySelector('.body');
@@ -25,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const logInReqs = document.querySelectorAll('.login-req');
   const registerReqs = document.querySelectorAll('.register-req');
   const buyCardReqs = document.querySelectorAll('.card-req');
+
+  let activeUser;
 
   const formRemoveError = (validatedField) => {
     validatedField.classList.remove('error');
@@ -91,6 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileMenuLogOut = document.querySelector('.log-out');
 
   //--------
+  const resetBookButton = () => {
+    [...document.querySelectorAll('.book__button')].map((button) => {
+      button.removeAttribute('disabled');
+      button.querySelector('.buy').classList.remove('hidden');
+      button.querySelector('.own').classList.add('hidden');
+    });
+  };
+
   bodyContent.addEventListener('click', (event) => {
     console.log(event.target);
 
@@ -116,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (
       event.target.closest('.log-in') ||
       event.target.closest('.librarycard__login-button') ||
-      (event.target.classList.contains('book__button') &&
+      (event.target.closest('.book__button') &&
         !document
           .querySelector('.profile__menu-title')
           .classList.contains('hidden'))
@@ -163,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Modal window Buy Card
     if (
-      event.target.classList.contains('book__button') &&
+      event.target.closest('.book__button') &&
       !iconInitialsUser.classList.contains('hidden') &&
       !iconInitialsUser.classList.contains('buyCardTrue')
     ) {
@@ -261,17 +276,42 @@ document.addEventListener('DOMContentLoaded', () => {
       event.target.id === 'summer' ||
       event.target.id === 'autumn'
     ) {
+      document.querySelectorAll('.season_input').forEach((season) => {
+        season.checked = false;
+      });
+      event.target.checked = true;
       const season = event.target.id;
       favoritesBooks.forEach((books) => {
         books.classList.add('opacity');
         setTimeout(() => {
           books.classList.add('hidden');
           document.querySelector(`.${season}`).classList.remove('hidden');
-        }, 1000);
+        }, 500);
       });
       setTimeout(() => {
         document.querySelector(`.${season}`).classList.remove('opacity');
-      }, 1100);
+      }, 510);
+    }
+
+    //buy books
+    if (
+      event.target.closest('.book__button') &&
+      !iconInitialsUser.classList.contains('hidden') &&
+      iconInitialsUser.classList.contains('buyCardTrue')
+    ) {
+      const bookInfo = event.target.closest('.book__info');
+      console.log(bookInfo);
+      const bookName = bookInfo.querySelector('.book__name').textContent;
+      const bookAuthor = bookInfo
+        .querySelector('.book__author')
+        .textContent.replace('By ', '');
+
+      activeUser.books.push(`${bookName}, ${bookAuthor}`);
+      activeUser.booksId.push(
+        `${bookInfo.querySelector('.book__button').getAttribute('id')}`
+      );
+      saveUser(activeUser);
+      fillMyProfile(activeUser);
     }
   });
 
@@ -298,6 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.email = email;
       this.cardNumber = getCardNumber();
       this.password = password;
+      this.booksId = [];
       this.books = [];
       this.visits = 1;
       this.bonuses = 0;
@@ -359,8 +400,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (formBuyCardValidate() === 0) {
         user.buyCard = true;
+        user.bonuses = 1240;
         iconInitialsUser.classList.add('buyCardTrue');
         saveUser(user);
+        fillMyProfile(user);
         modalBuyCard.reset();
         closeModalWindows();
       }
@@ -404,8 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return error;
     };
-
-    //buy books
   };
 
   //fill My Profile
@@ -428,6 +469,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalProfileCardNumber = document.querySelector('.card-number');
 
   const fillMyProfile = (user) => {
+    profileMenuCard.textContent = '';
+    profileMenuCard.textContent = `${user.cardNumber}`;
     modalProfileInitials.textContent = `${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`;
     modalProfilefullName.textContent = `${user.first_name} ${user.last_name}`;
     modalProfileScoreVisitsisits.textContent = user.visits;
@@ -437,7 +480,20 @@ document.addEventListener('DOMContentLoaded', () => {
       iconInitialsUser.classList.add('buyCardTrue');
     }
     if (user.books.length > 0) {
-      console.log([...user.books]);
+      modalProfileListBooks.textContent = '';
+
+      user.books.map((item) => {
+        let book = document.createElement('li');
+        book.textContent = item;
+        modalProfileListBooks.append(book);
+      });
+
+      user.booksId.map((bookId) => {
+        let bookButton = document.getElementById(`${bookId}`);
+        bookButton.setAttribute('disabled', 'disabled');
+        bookButton.querySelector('.buy').classList.add('hidden');
+        bookButton.querySelector('.own').classList.remove('hidden');
+      });
     }
     if (user.books.length === 0) {
       modalProfileListBooks.textContent = '';
@@ -448,6 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //log out
   const logOut = (user) => {
     profileMenuLogOut.addEventListener('click', (event) => {
+      resetBookButton();
       iconImg.classList.remove('hidden');
       iconInitialsUser.textContent = '';
       iconInitialsUser.removeAttribute('title');
@@ -479,6 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
       modalRegister.reset();
       closeModalWindows();
       activeAccount(user);
+      activeUser = user;
     }
   });
 
@@ -526,6 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalLogIn.reset();
         closeModalWindows();
         activeAccount(authorizedUser);
+        activeUser = authorizedUser;
       }
     }
   });

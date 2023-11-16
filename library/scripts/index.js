@@ -97,6 +97,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileMenuProfile = document.querySelector('.my-profile');
   const profileMenuLogOut = document.querySelector('.log-out');
 
+  //consts for Digital Library Cards
+  const blockGetCard = document.querySelector('.librarycard__get-card');
+  const blockVisitProfile = document.querySelector(
+    '.librarycard__visit-profile'
+  );
+  const readersName = document.querySelector('.readers-name');
+  const readersCard = document.querySelector('.readers-card');
+  const checkCard = document.querySelector('.form-library-card__button');
+  const dataActiveUser = document.querySelector('.profile__data');
+  const profileVisits = document.querySelector('.profile__score-visits');
+  const profileBonuses = document.querySelector('.profile__score-bonuses');
+  const profileBooks = document.querySelector('.profile__score-books');
+
+  const showProfileInfo = (user) => {
+    readersName.value = `${user.first_name} ${user.last_name}`;
+    readersCard.value = `${user.cardNumber}`;
+    profileVisits.textContent = user.visits;
+    profileBonuses.textContent = user.bonuses;
+    profileBooks.textContent = user.books.length;
+    checkCard.classList.add('hidden');
+    dataActiveUser.classList.remove('hidden');
+  };
+  const hiddenProfileInfo = () => {
+    readersName.value = '';
+    readersCard.value = '';
+    checkCard.classList.remove('hidden');
+    dataActiveUser.classList.add('hidden');
+  };
+
   //--------
   const resetBookButton = () => {
     [...document.querySelectorAll('.book__button')].map((button) => {
@@ -107,8 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   bodyContent.addEventListener('click', (event) => {
-    console.log(event.target);
-
     hiddenProfileMenu();
 
     //burger menu
@@ -167,7 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Modal window My Profile
-    if (event.target.classList.contains('my-profile')) {
+    if (
+      event.target.classList.contains('my-profile') ||
+      event.target.classList.contains('visit-profile')
+    ) {
       fixedOverlay.classList.remove('hidden');
       modalProfile.classList.remove('hidden');
       setTimeout(() => {
@@ -269,7 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Slider in Favorites block (1 stage)
-
     if (
       event.target.id === 'winter' ||
       event.target.id === 'spring' ||
@@ -300,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
       iconInitialsUser.classList.contains('buyCardTrue')
     ) {
       const bookInfo = event.target.closest('.book__info');
-      console.log(bookInfo);
       const bookName = bookInfo.querySelector('.book__name').textContent;
       const bookAuthor = bookInfo
         .querySelector('.book__author')
@@ -371,7 +399,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   //active account
-
   const activeAccount = (user) => {
     let initialsUser = `${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`;
 
@@ -389,6 +416,10 @@ document.addEventListener('DOMContentLoaded', () => {
     profileMenuCard.classList.remove('hidden');
     profileMenuProfile.classList.remove('hidden');
     profileMenuLogOut.classList.remove('hidden');
+
+    showProfileInfo(user);
+    blockGetCard.classList.add('hidden');
+    blockVisitProfile.classList.remove('hidden');
 
     fillMyProfile(user);
 
@@ -456,13 +487,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalProfilefullName = document.querySelector(
     '.modal_profile__fullname'
   );
-  const modalProfileScoreVisitsisits = document.querySelector(
+  const modalProfileVisits = document.querySelector(
     '.modal_profile__score-visits'
   );
-  const modalProfileScoreBonuses = document.querySelector(
+  const modalProfileBonuses = document.querySelector(
     '.modal_profile__score-bonuses'
   );
-  const modalProfileScoreBooks = document.querySelector(
+  const modalProfileBooks = document.querySelector(
     '.modal_profile__score-books'
   );
   const modalProfileListBooks = document.querySelector('.list-books');
@@ -473,9 +504,12 @@ document.addEventListener('DOMContentLoaded', () => {
     profileMenuCard.textContent = `${user.cardNumber}`;
     modalProfileInitials.textContent = `${user.first_name[0].toUpperCase()}${user.last_name[0].toUpperCase()}`;
     modalProfilefullName.textContent = `${user.first_name} ${user.last_name}`;
-    modalProfileScoreVisitsisits.textContent = user.visits;
-    modalProfileScoreBonuses.textContent = user.bonuses;
-    modalProfileScoreBooks.textContent = user.books.length;
+    modalProfileVisits.textContent = user.visits;
+    modalProfileBonuses.textContent = user.bonuses;
+    modalProfileBooks.textContent = user.books.length;
+
+    showProfileInfo(user);
+
     if (user.buyCard) {
       iconInitialsUser.classList.add('buyCardTrue');
     }
@@ -505,17 +539,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const logOut = (user) => {
     profileMenuLogOut.addEventListener('click', (event) => {
       resetBookButton();
+
       iconImg.classList.remove('hidden');
       iconInitialsUser.textContent = '';
       iconInitialsUser.removeAttribute('title');
       iconInitialsUser.classList.add('hidden');
       iconInitialsUser.classList.remove('buyCardTrue');
+
       profileMenuTitle.classList.remove('hidden');
       profileMenuLogIn.classList.remove('hidden');
       profileMenuRegister.classList.remove('hidden');
       profileMenuCard.classList.add('hidden');
       profileMenuProfile.classList.add('hidden');
       profileMenuLogOut.classList.add('hidden');
+
+      hiddenProfileInfo();
+      blockGetCard.classList.remove('hidden');
+      blockVisitProfile.classList.add('hidden');
     });
   };
 
@@ -621,9 +661,25 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   };
 
-  const form = document.querySelector('.form-library-card');
+  document
+    .querySelector('.form-library-card__button')
+    .addEventListener('click', (event) => {
+      event.preventDefault();
 
-  form.addEventListener('click', (event) => {
-    event.preventDefault();
-  });
+      if (
+        readersName.value != '' &&
+        readersCard.value != '' &&
+        getUser(readersCard.value)
+      ) {
+        const checkUser = getUser(readersCard.value);
+        if (
+          readersName.value === `${checkUser.first_name} ${checkUser.last_name}`
+        ) {
+          showProfileInfo(checkUser);
+          setTimeout(() => {
+            hiddenProfileInfo();
+          }, 10000);
+        }
+      }
+    });
 });

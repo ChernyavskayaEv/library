@@ -1572,7 +1572,7 @@ input[type='number'] {
 .librarycard__get-card,
 .librarycard__visit-profile {
   width: 456px;
-  height: 253px;
+  min-height: 253px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -1648,7 +1648,7 @@ input[type='number'] {
   .librarycard__get-card,
   .librarycard__visit-profile {
     align-items: center;
-    margin-top: 20px;
+    margin: 20px 0;
   }
 
   .librarycard__get-card-description,

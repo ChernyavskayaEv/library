@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hiddenNav = () => {
     headerNavBtn.classList.remove('header__nav-btn_active');
     nav.classList.remove('header__nav_active');
+    nav.style.height = '510px';
   };
 
   //const for authorization menu
@@ -125,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkCard.classList.remove('hidden');
     dataActiveUser.classList.add('hidden');
   };
+  hiddenProfileInfo();
 
   //--------
   const resetBookButton = () => {
@@ -143,6 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       headerNavBtn.classList.toggle('header__nav-btn_active');
       nav.classList.toggle('header__nav_active');
+      if (document.querySelector('.header__nav_active')) {
+        if (
+          window.innerHeight <
+          document.querySelector('.header__nav_active').clientHeight
+        ) {
+          document.querySelector(' .header__list').style.gap = 0;
+          nav.style.height = '320px';
+        }
+      }
     } else {
       hiddenNav();
     }

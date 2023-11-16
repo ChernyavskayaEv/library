@@ -144,6 +144,7 @@ h2 {
 .header {
   width: 100%;
   background: #0c0c0e;
+  overflow: hidden;
 }
 
 .wrapper {
@@ -827,13 +828,13 @@ input[type='number'] {
   .header__nav {
     display: block;
     position: fixed;
+    top: 70px;
+    right: -325%;
     margin: 0;
     box-sizing: border-box;
     width: 332px;
     height: 510px;
     background: #0c0c0e;
-    top: 85px;
-    right: -100%;
     transition: right 1s;
     z-index: 5;
   }
